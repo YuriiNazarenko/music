@@ -1,0 +1,346 @@
+@use "../base" as *;
+
+$btn-fz: 1rem;
+$btn-fw: $fw-semibold;
+$btn-ff: $ff-secondary;
+$btn-color: var(--c-light);
+$btn-leading: 1.25em;
+$btn-padding-y: 20px;
+$btn-padding-x: 34px;
+$btn-border-radius: $border-radius-sm;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: $btn-padding-y $btn-padding-x;
+  font-size: $btn-fz;
+  font-weight: $btn-fw;
+  font-family: $btn-ff;
+  line-height: $btn-leading;
+  color: $btn-color;
+  border-radius: $btn-border-radius;
+  border-width: 1px;
+  border-color: transparent;
+  svg {
+    pointer-events: none;
+    fill: $btn-color;
+  }
+  .icon-arrow-up {
+    transform: rotate(90deg);
+  }
+  &_bordered {
+    @extend %btn-bordered;
+    &:hover {
+      @extend %btn-brand;
+    }
+  }
+  &_brand {
+    @extend %btn-brand;
+    box-shadow: var(--shadow-blue);
+    &:hover {
+      @extend %btn-bordered;
+      svg {
+        fill: var(--c-blue);
+      }
+    }
+  }
+  &_accent {
+    @extend %btn-accent;
+    min-width: 136px;
+    &:hover {
+      color: var(--c-red);
+      background-color: $btn-color;
+    }
+    @media (max-width: ($lg - 0.02)) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+  &_neutral {
+    text-transform: uppercase;
+    color: var(--c-blue);
+    &:hover {
+      @extend %btn-accent;
+    }
+
+    @media (max-width: ($lg - 0.02)) {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 32px;
+      margin-bottom: 16px;
+      padding: 10px 20px 9px;
+    }
+  }
+  &_watch-video {
+    background-color: transparent;
+    font-weight: $fw-bold;
+    &:hover {
+      color: var(--c-red);
+      svg {
+        fill: var(--c-red);
+      }
+    }
+  }
+}
+
+.btn-burger_hidden-active,
+.btn-close {
+  @extend %btn-burger;
+}
+
+%btn-burger {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: linear-gradient(90deg, var(--c-light), var(--c-light));
+  background-size: 25px 2px;
+  background-repeat: no-repeat;
+  background-position: 50% 14px;
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--c-light);
+    position: absolute;
+    right: 7.5px;
+  }
+  &:before {
+    top: 19px;
+    width: 21px;
+  }
+
+  &:after {
+    top: 24px;
+    width: 25px;
+  }
+}
+
+%btn-bordered {
+  border: 1px solid var(--c-blue);
+  color: var(--c-blue);
+  background-color: transparent;
+  box-shadow: var(--shadow-blue);
+}
+
+%btn-brand {
+  background-color: var(--c-blue);
+  color: $btn-color;
+}
+
+%btn-accent {
+  background-color: var(--c-red);
+  color: $btn-color;
+}
+
+.btn-burger_hidden-active {
+  &.is_active {
+    display: none;
+  }
+}
+
+.dialog__btn-close,
+.btn-close {
+  background-image: none;
+  z-index: $z-index-overlay;
+  &:before,
+  &:after {
+    top: 19px;
+    width: 20px;
+    right: 10px;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+
+// .btn {
+//   border-radius: $border-radius;
+//   color: var(--c-light);
+//   line-height: $btn-leading;
+//   border: none;
+//   background-color: transparent;
+//   display: inline-flex;
+//   font-size: $btn-fz;
+//   text-align: center;
+//   svg {
+//     pointer-events: none;
+//   }
+//   &_bordered {
+//     border: 1px solid var(--c-blue);
+//     padding: $btn-padding-y $btn-padding-x;
+//     color: var(--c-blue);
+//     font-weight: $btn-fw;
+//     &:hover {
+//       background-color: var(--c-blue);
+//       color: var(--c-light);
+//     }
+//   }
+//   &_accent {
+//     background-color: var(--c-red);
+//     color: var(--c-light);
+//     padding: 18px $btn-padding-x;
+//     min-width: 136px;
+//     font-weight: $fw-bold;
+//     &:hover {
+//       color: var(--c-red);
+//       background-color: var(--c-light);
+//     }
+//   }
+//   &_brand {
+//     background-color: var(--c-blue);
+//     align-items: center;
+//     justify-content: center;
+//     gap: 16px;
+//     padding: $btn-padding-y $btn-padding-x;
+//     box-shadow: var(--shadow-blue);
+//     border: 1px solid transparent;
+//     .icon-arrow-up {
+//       fill: var(--c-light);
+//       transform: rotate(90deg);
+//     }
+//     &:hover {
+//       background: transparent;
+//       border-color: var(--c-blue);
+//       color: var(--c-blue);
+//       .icon-arrow-up {
+//         fill: var(--c-blue);
+//       }
+//     }
+//   }
+//   &-watch-video {
+//     background-color: transparent;
+//     color: var(--c-light);
+//     font-family: $ff-secondary;
+//     font-weight: $btn-fw;
+//     font-size: 1rem;
+//     border: none;
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     gap: 15px;
+
+//     &:hover {
+//       color: var(--c-red);
+
+//       .icon-play {
+//         fill: var(--c-red);
+//       }
+//     }
+
+//     .icon-play {
+//       fill: var(--c-light);
+//       width: 36px;
+//       height: 36px;
+//     }
+//     @media (min-width: $lg) {
+//       font-size: rem(20);
+//       line-height: em(20, 28);
+//       gap: 18px;
+//       .icon-play {
+//         width: 56px;
+//         height: 56px;
+//       }
+//     }
+//   }
+// }
+
+// %btn-burger {
+//   position: relative;
+//   display: block;
+//   width: 40px;
+//   height: 40px;
+//   border: none;
+//   cursor: pointer;
+//   background-color: transparent;
+//   background-image: linear-gradient(90deg, var(--c-light), var(--c-light));
+//   background-size: 25px 2px;
+//   background-repeat: no-repeat;
+//   background-position: 50% 14px;
+//   &:before,
+//   &:after {
+//     content: "";
+//     display: block;
+//     height: 2px;
+//     background: var(--c-light);
+//     position: absolute;
+//     right: 7.5px;
+//   }
+//   &:before {
+//     top: 19px;
+//     width: 21px;
+//   }
+
+//   &:after {
+//     top: 24px;
+//     width: 25px;
+//   }
+// }
+
+// .btn-burger_hidden-active,
+// .btn-close {
+//   @extend %btn-burger;
+// }
+
+// .btn-burger_hidden-active {
+//   &.is_active {
+//     display: none;
+//   }
+// }
+
+// .dialog__btn-close,
+// .btn-close {
+//   background-image: none;
+//   z-index: $z-index-overlay;
+//   &:before,
+//   &:after {
+//     top: 19px;
+//     width: 20px;
+//     right: 10px;
+//   }
+
+//   &:before {
+//     transform: rotate(45deg);
+//   }
+
+//   &:after {
+//     transform: rotate(-45deg);
+//   }
+// }
+
+// .btn-get-tickets {
+//   text-transform: uppercase;
+//   color: var(--c-blue);
+//   font-size: $btn-fz;
+//   font-family: $btn-ff;
+//   line-height: $btn-leading;
+//   font-weight: $btn-fw;
+//   background-color: #fff;
+//   border: none;
+//   border-radius: 8px;
+//   padding: 10px 20px 9px;
+
+//   @media (max-width: ($lg - 0.02)) {
+//     position: relative;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     margin-top: 32px;
+//     margin-bottom: 16px;
+//   }
+
+//   @media (min-width: $lg) {
+//     padding: 18px $btn-padding-x;
+//   }
+// }
