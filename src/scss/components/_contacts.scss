@@ -74,6 +74,9 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 24px;
+      a {
+        color: var(--c-light);
+      }
 
       @media (min-width: $xl) {
         margin-bottom: 32px;
